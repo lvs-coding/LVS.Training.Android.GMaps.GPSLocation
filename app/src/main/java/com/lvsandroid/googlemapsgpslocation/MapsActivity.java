@@ -35,8 +35,6 @@ import permissions.dispatcher.RuntimePermissions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private Double latitude = 0d;
-    private Double longitude = 0d;
     private Location currentLocation;
     int markerIdx = 0;
 
@@ -53,7 +51,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 public void onLocationChanged(Location location) {
                     mMap.clear();
                     currentLocation = location;
-                    setMarkerCurrentLocation();
+                    if(currentLocation != null) {
+                        setMarkerCurrentLocation();
+                    }
                 }
 
                 @Override
@@ -146,6 +146,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void setMarkerCurrentLocation() {
+        Double latitude = 0d;
+        Double longitude = 0d;
+
         latitude = currentLocation.getLatitude();
         longitude = currentLocation.getLongitude();
 
